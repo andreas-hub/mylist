@@ -1,18 +1,18 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany, JoinTable} from "typeorm"
-import {Comic} from "./Comic";
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, ManyToMany} from "typeorm"
+import {AuthorRole} from "../store/databaseEnums";
+import {Entry} from "./Entry";
 
 @Entity()
 export class Author extends BaseEntity {
     @PrimaryGeneratedColumn({unsigned: true})
     id!: number;
 
-    @Column({length: 255, nullable: false})
+    @Column({length: 128, nullable: false})
     name!: string;
 
-    @Column({length: 255, nullable: true})
-    role?: string;
+    @Column({type: 'tinyint', unsigned: true, nullable: true})
+    author_role?: AuthorRole;
 
-    @ManyToMany(() => Comic, c => c.authors)
-    @JoinTable()
-    comics?: Comic[];
+    @ManyToMany(() => Entry, (entry) => entry.authors)
+    entries?: Entry[];
 }

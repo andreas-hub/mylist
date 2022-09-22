@@ -1,16 +1,25 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm"
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToOne, JoinColumn} from "typeorm"
+import {Entry} from "./Entry";
+import {MovieStatus, Videography} from "../store/databaseEnums";
 
 @Entity()
 export class Movie extends BaseEntity {
     @PrimaryGeneratedColumn({unsigned: true})
     id!: number;
 
-    @Column()
-    title!: string;
+    @OneToOne(() => Entry)
+    @JoinColumn()
+    entry!: Entry;
 
-    @Column()
-    description?: string;
+    @Column({type: 'tinyint', unsigned: true, nullable: false})
+    movieStatus!: MovieStatus;
 
-    @Column()
-    rating?: number;
+    @Column({type: 'tinyint', unsigned: true, nullable: false})
+    videography!: Videography;
+
+    @Column({type: 'decimal', precision: 15, scale: 2, nullable: true})
+    box_office?: number;
+
+    @Column({type: 'int', unsigned: true, nullable: true})
+    duration?: number;
 }
