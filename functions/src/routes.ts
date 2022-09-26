@@ -1,9 +1,6 @@
 import * as express from 'express';
 import MovieController from './controllers/MovieController';
 
-/**
- * Router
- */
 // eslint-disable-next-line new-cap
 const router = express.Router();
 

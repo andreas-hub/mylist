@@ -13,7 +13,7 @@ class Constants {
         type: 'mysql',
     };
 
-    private _API_KEYS: ApiKeys = {
+    private _API_KEYS = {
         rapidApi: process.env.RAPID_API_KEY || '',
     };
 
@@ -28,12 +28,18 @@ class Constants {
     };
 
     private _URL = {
-        imgur: 'https://api.imgur.com/3',
+        API: {
+            imgur: 'https://api.imgur.com/3',
+            mdb: 'https://movie-database-alternative.p.rapidapi.com',
+            tvMaze: 'https://api.tvmaze.com',
+        },
     };
 
     private _HEADERS = {
         json: {'Content-Type': 'application/json'},
         imgurAuth: {'Authorization': `Bearer ${process.env.IMGUR_ACCESS_TOKEN}`},
+        rapidApiHost: {'X-RapidAPI-Host': 'movie-database-alternative.p.rapidapi.com'},
+        rapidApiKey: {'X-RapidAPI-Key': this._API_KEYS.rapidApi},
     };
 
     /**
@@ -70,10 +76,6 @@ class Constants {
     get HEADERS() {
         return this._HEADERS;
     }
-}
-
-interface ApiKeys {
-    rapidApi: string
 }
 
 interface Imgur {

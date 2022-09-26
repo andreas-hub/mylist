@@ -23,7 +23,7 @@ class ImgurService {
             ...Constants.HEADERS.json,
             ...Constants.HEADERS.imgurAuth,
         };
-        const imgurUrl = `${Constants.URL.imgur}/image`;
+        const imgurUrl = `${Constants.URL.API.imgur}/image`;
         const response = await axios.post<ImgurUploadImage>(imgurUrl, data, {headers});
         return response.data.data.id;
     }
